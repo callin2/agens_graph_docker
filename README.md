@@ -9,3 +9,10 @@ Agens Graph Dcoker Image
 
 ## 기본사용자 / password 
 - agens / qwer4321
+
+## build 
+- `docker build -t callin/agensgraph:latest  .`
+
+## run 
+- `docker run -dt -p 5432:5432 callin/agensgraph`
+
