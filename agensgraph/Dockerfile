@@ -1,4 +1,4 @@
-FROM ubuntu:16.04
+FROM node:10.13.0
 
 RUN apt-get update
 RUN apt-get install -y build-essential libreadline-dev zlib1g-dev flex bison git
@@ -28,12 +28,19 @@ USER root
 
 COPY docker-entrypoint.sh /usr/local/bin/
 RUN chmod +x /usr/local/bin/docker-entrypoint.sh
+RUN npm i -g pegjs
 
 USER agens
+
+
+RUN git clone https://github.com/callin2/agens_http.git /home/agens/Agens_Http
+RUN npm install --only=prod --prefix /home/agens/Agens_Http/api_server
+
 
 ENTRYPOINT ["docker-entrypoint.sh"]
 
 EXPOSE 5432
+EXPOSE 3000
 
 RUN set -e;\
     initdb;\
